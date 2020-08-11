@@ -12,8 +12,19 @@ export const themeVars = {
 export const theme = createMuiTheme({
   palette: {
     type: "dark",
+    background: {
+      paper: "rgb(33, 36, 41)",
+    },
   },
   typography: {
     fontFamily: ["Bad Script"].join(", "),
+  },
+  overrides: {
+    MuiPaper: {
+      root: {
+        borderRadius: "30px !important",
+        boxShadow: "none !important",
+      },
+    },
   },
 });

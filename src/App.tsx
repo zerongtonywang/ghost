@@ -4,6 +4,7 @@ import {
   makeStyles,
   ThemeProvider,
   Typography,
+  Paper,
 } from "@material-ui/core";
 import React from "react";
 import "./App.css";
@@ -44,14 +45,21 @@ function App() {
         <Box p={1} pt={2}>
           <Typography variant="h1">Ghost</Typography>
         </Box>
-        <Box flex={1} p={2}>
+        <Box flex={1}>
           <Box
             maxWidth={400}
             mx="auto"
             height="100%"
             className={classes.content}
-          ></Box>
+          >
+            <Box m={2}>
+              <Paper>
+                <Box height={200} />
+              </Paper>
+            </Box>
+          </Box>
         </Box>
+
         <Box textAlign="center" pt={4}>
           <img
             src={ghostLogo}
