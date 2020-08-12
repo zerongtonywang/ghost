@@ -17,7 +17,7 @@ export const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: ["Bad Script"].join(", "),
+    fontFamily: ["Patrick Hand"].join(", "),
   },
   overrides: {
     MuiPaper: {

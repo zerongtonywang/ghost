@@ -1,14 +1,8 @@
-import {
-  Box,
-  CssBaseline,
-  makeStyles,
-  ThemeProvider,
-  Typography,
-  Paper,
-} from "@material-ui/core";
+import { Box, CssBaseline, makeStyles, ThemeProvider } from "@material-ui/core";
 import React from "react";
 import "./App.css";
 import ghostLogo from "./ghost3.png";
+import { PostCard } from "./PostCard";
 import { theme } from "./theme";
 
 const useStyles = makeStyles({
@@ -20,16 +14,10 @@ const useStyles = makeStyles({
     backgroundRepeat: "no-repeat",
   },
   content: {},
-  // "@keyframes shadowInOut": {
-  //   "0%": {
-  //     filter: "drop-shadow(0.5px 0.5px 0.5px #ffffff)",
-  //   },
-  //   to: {
-  //     filter: "drop-shadow(2px 2px 2px #ffffff)",
-  //   },
-  // },
   logo: {},
 });
+
+const posts = [{}, {}, {}, {}];
 
 function App() {
   const classes = useStyles();
@@ -41,26 +29,35 @@ function App() {
         height={window.innerHeight}
         display="flex"
         flexDirection="column"
+        overflow="hidden"
+        position="relative"
       >
-        <Box p={1} pt={2}>
-          <Typography variant="h1">Ghost</Typography>
-        </Box>
-        <Box flex={1}>
+        <Box flex={1} pt={2} overflow="auto">
           <Box
             maxWidth={400}
             mx="auto"
-            height="100%"
             className={classes.content}
+            px={2}
+            pb={20}
           >
-            <Box m={2}>
-              <Paper>
-                <Box height={200} />
-              </Paper>
-            </Box>
+            {posts.map((p, index) => (
+              <>
+                <PostCard />
+                {index !== posts.length - 1 && <Box height={32} />}
+              </>
+            ))}
           </Box>
         </Box>
 
-        <Box textAlign="center" pt={4}>
+        <Box
+          textAlign="center"
+          pt={4}
+          position="absolute"
+          width="100%"
+          bottom={0}
+          px={4}
+          py={3}
+        >
           <img
             src={ghostLogo}
             alt="ghost-logo"
