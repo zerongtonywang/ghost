@@ -84,7 +84,7 @@ export const Login: React.FC = () => {
                 size="small"
                 onClick={() => history.push(routes.register)}
               >
-                login here
+                sign up here
               </Button>
             </Box>
           </form>
