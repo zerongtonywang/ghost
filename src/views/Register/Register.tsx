@@ -56,7 +56,6 @@ export const Register: React.FC = () => {
                 name="password"
                 label="Password"
                 margin="dense"
-                type="password"
                 inputRef={register({
                   required: "Password is required",
                 })}
