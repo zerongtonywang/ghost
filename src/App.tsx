@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Routes } from "routes";
 import { Login } from "views/Login";
 import { theme } from "./theme";
+import { Profile } from "views/Profile";
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
       <CssBaseline />
       <BrowserRouter>
         <Switch>
+          <Route path={Routes.Profile}>
+            <Profile />
+          </Route>
           <Route path={Routes.Login}>
             <Login />
           </Route>
