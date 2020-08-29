@@ -1,8 +1,6 @@
 import { Box, Button, Paper, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
-import { routes } from "routes";
 import { firebaseInstance } from "_firebase";
 
 interface LoginForm {
@@ -11,16 +9,20 @@ interface LoginForm {
 }
 
 export const Login: React.FC = () => {
-  const history = useHistory();
   const { handleSubmit, register, errors } = useForm<LoginForm>();
 
   const [networkState, setNetworkState] = useState(0);
+  const [createAccount, setCreateAccount] = useState(false);
 
   function onSubmit(values: LoginForm) {
     setNetworkState(1);
     firebaseInstance
       .auth()
-      .signInWithEmailAndPassword(values.email, values.password)
+      [
+        createAccount
+          ? "createUserWithEmailAndPassword"
+          : "signInWithEmailAndPassword"
+      ](values.email, values.password)
       .then(() => {
         setNetworkState(2);
       })
@@ -36,7 +38,7 @@ export const Login: React.FC = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Box width="80%" maxWidth={600}>
+      <Box width="80%" maxWidth={400}>
         <Paper>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Box display="flex" flexDirection="column" p={2}>
@@ -56,7 +58,7 @@ export const Login: React.FC = () => {
                 name="password"
                 label="Password"
                 margin="dense"
-                type="password"
+                type={createAccount ? undefined : "password"}
                 inputRef={register({
                   required: "Password is required",
                 })}
@@ -72,23 +74,27 @@ export const Login: React.FC = () => {
                 type="submit"
                 color={networkState === 2 ? "primary" : undefined}
               >
-                {networkState === 1
+                {createAccount
+                  ? networkState === 1
+                    ? "CREATING ACCOUNT..."
+                    : networkState === 2
+                    ? "SUCCESSFUL!"
+                    : "CREATE ACCOUNT"
+                  : networkState === 1
                   ? "LOGGING IN..."
                   : networkState === 2
                   ? "SUCCESSFUL!"
                   : "LOGIN"}
               </Button>
-
-              <Box height={16} />
-              <Button
-                size="small"
-                onClick={() => history.push(routes.register)}
-              >
-                sign up here
-              </Button>
             </Box>
           </form>
         </Paper>
+
+        <Box textAlign="center" mt={1}>
+          <Button size="small" onClick={() => setCreateAccount(!createAccount)}>
+            {createAccount ? "login" : "sign up"} here
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

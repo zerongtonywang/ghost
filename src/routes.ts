@@ -1,4 +1,3 @@
-export const routes = {
-  login: "/login",
-  register: "/register",
-};
+export enum Routes {
+  Login = "/login",
+}

@@ -1,9 +1,8 @@
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { routes } from "routes";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Routes } from "routes";
 import { Login } from "views/Login";
-import { Register } from "views/Register";
 import { theme } from "./theme";
 
 function App() {
@@ -12,11 +11,11 @@ function App() {
       <CssBaseline />
       <BrowserRouter>
         <Switch>
-          <Route path={routes.register}>
-            <Register />
+          <Route path={Routes.Login}>
+            <Login />
           </Route>
           <Route path="/">
-            <Login />
+            <Redirect to={Routes.Login} />
           </Route>
         </Switch>
       </BrowserRouter>
